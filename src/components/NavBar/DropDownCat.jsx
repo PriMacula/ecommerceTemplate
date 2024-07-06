@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const DropDownCat = ({ cat }) => {
   return (
-    <div className="flex absolute top-[50px]  lg:top-[60px] left-0 drop-shadow-xl h-[260px] w-full bg-white items-center justify-center gap-[80px] z-20 border-t-2 border-black ">
+    <div className="flex absolute top-[50px]  lg:top-[60px] left-0 drop-shadow-xl h-[260px] w-full bg-white items-center justify-center gap-[80px] z-10 border-t-2 border-black ">
       <Link
         href="/"
         className="flex flex-col h-full items-center justify-center gap-6"

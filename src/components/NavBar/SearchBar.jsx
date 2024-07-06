@@ -23,7 +23,7 @@ const SearchBar = ({ device, menu }) => {
         <div
           className={`fixed top-0 left-0 flex flex-col overflow-y-auto ${
             device === "mobile" ? " bg-black text-white" : "bg-white"
-          } h-[100%]  min-h-screen w-[100%] md:p-4 px-4 py-2 gap-6 z-10`}
+          } h-[100%]  min-h-screen w-[100%] md:p-4 px-4 py-2 gap-6 z-20`}
         >
           <div className="flex md:gap-4 gap-2 h-20 w-full items-center">
             <MdArrowBackIosNew
