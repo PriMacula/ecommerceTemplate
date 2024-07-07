@@ -21,7 +21,7 @@ const NavLinks = () => {
   return (
     <>
       <div className="flex gap-3 xl:gap-6 mt-2">
-        <Link className="text-xl font-semibold" href="#">
+        <Link className="text-xl font-semibold" href="/">
           Home
         </Link>
         <div

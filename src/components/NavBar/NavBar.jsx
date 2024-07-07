@@ -8,7 +8,7 @@ import NavLinks from "./NavLinks";
 import SearchBar from "./SearchBar";
 const NavBar = () => {
   return (
-    <div className="sticky top-0 h-19 px-4 md:px-8 lg:px-8 xl:px-18 2xl:px-28 z-30 bg-white">
+    <div className="sticky top-0 h-16 px-4 md:px-8 lg:px-8 xl:px-18 2xl:px-28 z-30 bg-white">
       {/* MOBILE_SCREEN */}
         <div className="h-full flex items-center justify-between md:hidden">
           <MobileMenu />
