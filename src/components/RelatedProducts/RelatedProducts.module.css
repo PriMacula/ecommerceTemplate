@@ -1,0 +1,33 @@
+.relatedProducts {
+    margin-top: 40px;
+  }
+  
+  .relatedProducts h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .productList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .productCard {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: calc(33.333% - 20px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .productCard h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+  
+  .productCard p {
+    font-size: 1rem;
+  }
+  
