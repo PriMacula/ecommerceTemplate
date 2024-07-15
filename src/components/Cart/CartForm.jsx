@@ -27,7 +27,7 @@ const governorates = [
 
 const CartForm = () => {
   return (
-    <div className="bg-[#f6fff8] flex flex-col gap-8 rounded-md md:mt-0 ">
+    <div className="bg-[#e8f2ea] flex flex-col gap-8 rounded-md md:mt-0 ">
       <div className="flex flex-col  gap-8  p-4 sm:p-12">
         <div className="flex  gap-8 w-full  justify-center ">
           <div className="flex flex-col w-[45%] gap-2">

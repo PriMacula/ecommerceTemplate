@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import RelatedProducts from "@/components/RelatedProducts/RelatedProducts";
 import Add from "@/components/SingleProduct/Add";
-import Benefits from "@/components/SingleProduct/Benefits";
 import CallToAction from "@/components/SingleProduct/CallToAction";
 import CustomizeProduct from "@/components/SingleProduct/CustomizeProduct";
 import ProducImgs from "@/components/SingleProduct/ProducImgs";
@@ -15,26 +14,19 @@ import styles from "./SingleProduct.module.css";
 
 const SingleProductPage = () => {
   const { id } = useParams();
-  const price = 100;
-  const discountedPrice = 99;
+  
   const [product, setProduct] = useState(null);
-  const [relatedProducts, setRelatedProducts] = useState([]);
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     if (id) {
       // Fetch the product details
       fetchProduct(id).then((data) => {
-        setProduct(data);
+        setProduct(data.product);
 
-        // Fetch related products based on the product category
-        fetchRelatedProducts(3).then((relatedData) =>
-          setRelatedProducts(relatedData)
-        );
+        // Fetch reviews for the product
+        fetchReviews(id).then((data) => setReviews(data.reviews));
       });
-
-      // Fetch reviews for the product
-      fetchReviews(id).then((data) => setReviews(data));
     }
   }, [id]);
 
@@ -60,7 +52,7 @@ const SingleProductPage = () => {
   }
 
   return (
-    <div className="flex flex-col  gap-16 mt-16 px-4 md:px-8 lg:px-8 xl:px-18 2xl:px-28 relative">
+    <div className="flex flex-col gap-16 mt-16 px-4 md:px-8 lg:px-8 xl:px-18 2xl:px-28 relative">
       <div className="flex flex-col lg:flex-row">
         {/* IMGS */}
         <div className="w-full lg:w-1/2">
@@ -72,12 +64,12 @@ const SingleProductPage = () => {
             <h1 className="text-3xl font-semibold">{product.title}</h1>
             <div className="flex items-center gap-2">
               <h2 className="font-semibold text-xl text-[#FF0058]">
-                {discountedPrice} DT
+                {(product.price * 0.8).toFixed(2)} DT
               </h2>
               <h4 className="text-sm font-medium text-[#FF0058]">
-                -{((price - discountedPrice) / price) * 100}%
+                -{((product.price - (product.price * 0.8)) / product.price) * 100}%
               </h4>
-              <h3 className="text-gray-800 line-through">{price} DT</h3>
+              <h3 className="text-gray-800 line-through">{product.price} DT</h3>
             </div>
             <p>{product.description}</p>
           </div>
@@ -96,7 +88,8 @@ const SingleProductPage = () => {
           </div>
         </div>
       </div>
-      <RelatedProducts products={relatedProducts} />
+      <h2 className={styles.reviewTitle}>Related Products</h2>
+      <RelatedProducts category={product.category} productId={product._id} />
       <h2 className={styles.reviewTitle}>Customer Reviews</h2>
       <ReviewList reviews={reviews} />
       <AddReview onAddReview={handleAddReview} />
@@ -106,16 +99,7 @@ const SingleProductPage = () => {
 
 // Fetch single product details from the API
 const fetchProduct = async (id) => {
-  const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-  const data = await response.json();
-  return data;
-};
-
-// Fetch related products based on category from the API
-const fetchRelatedProducts = async (limit) => {
-  const response = await fetch(
-    `https://fakestoreapi.com/products/category/electronics?limit=${limit}`
-  );
+  const response = await fetch(`/api/getProductById?id=${id}`);
   const data = await response.json();
   return data;
 };
