@@ -10,7 +10,7 @@ const Hero = () => {
             alt=""
             fill
             className="object-cover"
-            sizes="(max-width: 768px) 100vw"
+            
           />
         </div>
         <div className="flex h-full w-full md:w-1/2 relative">
