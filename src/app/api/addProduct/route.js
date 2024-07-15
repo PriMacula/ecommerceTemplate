@@ -1,10 +1,10 @@
-import connect from '../../mongodb';
+import connectToDatabase from '../../mongodb';
 import Product from '../../models/Product';
 import { NextResponse } from 'next/server';
 
 export async function POST(request) {
     try {
-        await connect();
+        await connectToDatabase();
 
         // Destructure the incoming JSON body
         const { title, description, price, image, category } = await request.json();

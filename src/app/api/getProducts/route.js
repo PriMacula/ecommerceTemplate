@@ -1,10 +1,10 @@
-import { connect } from '../../mongodb';
+import connectToDatabase from '../../mongodb';
 import Product from '../../models/Product';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
     try {
-        await connect(); // Establish MongoDB connection
+        await connectToDatabase(); // Establish MongoDB connection
 
         const products = await Product.find(); // Fetch products from MongoDB
         return NextResponse.json({ products }); // Return JSON response with products

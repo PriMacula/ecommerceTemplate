@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from './ProductCard.module.css';
 
 const truncateText = (text, maxLength) => {
@@ -11,7 +12,7 @@ const truncateText = (text, maxLength) => {
 };
 
 const ProductCard = ({ product }) => {
-  const truncatedTitle = truncateText(product.title, 20); // Adjust the max length as needed
+  const truncatedTitle = truncateText(product.title, 20); 
 
   return (
     <div className={styles.card}>
@@ -29,7 +30,9 @@ const ProductCard = ({ product }) => {
           {truncatedTitle}
         </h3>
         <p className={styles.price}>${product.price}</p>
-        <button className={styles.button}>View Details</button>
+        <Link href={`/${product._id}`} passHref>
+          <button className={styles.button}>View Details</button>
+        </Link>
       </div>
     </div>
   );

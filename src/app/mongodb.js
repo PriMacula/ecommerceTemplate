@@ -1,6 +1,7 @@
+// src/mongodb.js
 import mongoose from 'mongoose';
 
-const connect = async () => {
+const connectToDatabase = async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URL, {
             dbName: 'EcommerceSite',
@@ -14,4 +15,4 @@ const connect = async () => {
     }
 };
 
-export { connect }; // Export the connect function
+export default connectToDatabase;

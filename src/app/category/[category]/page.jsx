@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import ProductList from '../../../components/ProductList/ProductList';
@@ -7,13 +6,14 @@ import styles from './Category.module.css';
 
 const CategoryPage = () => {
   const pathname = usePathname();
-  const category = pathname.split('/')[2];
+  const category = pathname.split('/')[2]; // Adjust to extract category from URL as per your setup
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
+    // Example fetchProducts function to fetch products based on category
     const fetchProducts = async (category) => {
       try {
-        const response = await fetch(`http://localhost:3000/api/getProducts`);
+        const response = await fetch(`/api/getProductsByCategory?category=${category}`);
         if (!response.ok) {
           throw new Error('Failed to fetch products');
         }
@@ -29,6 +29,10 @@ const CategoryPage = () => {
 
   return (
     <div className={styles.categoryPage}>
+      <h1 className={styles.title}>{category.toUpperCase()}</h1>
+      <ProductList products={products} />
+      <h1 className={styles.title}>{category.toUpperCase()}</h1>
+      <ProductList products={products} />
       <h1 className={styles.title}>{category.toUpperCase()}</h1>
       <ProductList products={products} />
     </div>
