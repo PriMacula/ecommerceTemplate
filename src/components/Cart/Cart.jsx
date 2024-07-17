@@ -31,10 +31,11 @@ const Cart = () => {
       />
       {isOpen && (
         <div>
-          <div className="bg-black bg-opacity-60 fixed top-0 right-0 h-full w-full z-10" />
+          <div className="bg-black bg-opacity-40 fixed top-0 right-0 h-full w-full z-10" />
           <div
-            className="fixed top-0 right-0 bg-[#f9f9f9] h-[100vh] w-3/4 md:w-1/2 xl:w-1/3
-          z-20 overflow-hidden"
+            className={`fixed top-0 right-0 bg-[#f9f9f9] h-[100vh] w-3/4 md:w-1/2 xl:w-1/3 z-20 overflow-hidden transition-transform duration-1000 ease-in-out transform ${
+              isOpen ? "translate-x-0" : "translate-x-full"
+            } ${isOpen ? "visible" : "invisible"}`}
           >
             <div className="h-20 bg-black flex items-center justify-between p-4">
               <h2 className="text-3xl text-white font-bold">My Cart</h2>
@@ -150,7 +151,10 @@ const Cart = () => {
                   </div>
                   <div className="flex items-center justify-center ">
                     <Link href="/cart" className="w-full">
-                      <button className="bg-[#00b27d] text-white text-xl font-semibold w-full p-3 rounded-md" onClick={()=>setIsOpen(false)}>
+                      <button
+                        className="bg-[#00b27d] text-white text-xl font-semibold w-full p-3 rounded-md"
+                        onClick={() => setIsOpen(false)}
+                      >
                         Process Order
                       </button>
                     </Link>

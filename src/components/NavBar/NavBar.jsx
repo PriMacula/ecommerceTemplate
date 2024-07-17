@@ -7,9 +7,10 @@ import Link from "next/link";
 import NavLinks from "./NavLinks";
 import SearchBar from "./SearchBar";
 import Cart from "../Cart/Cart";
+import AuthSidebar from "../UserAuth/AuthSidebar";
 const NavBar = () => {
   return (
-    <div className="sticky top-0 h-16 px-4 md:px-8 lg:px-8 xl:px-18 2xl:px-28 z-30 bg-white">
+    <div className="sticky top-0 h-20 py-2 px-4 md:px-8 lg:px-8 xl:px-18 2xl:px-28 z-30 bg-white">
       {/* MOBILE_SCREEN */}
       <div className="h-full flex items-center justify-between md:hidden">
         <MobileMenu />
@@ -41,7 +42,7 @@ const NavBar = () => {
         {/* RIGHT */}
         <div className="flex flex-1 items-center justify-end gap-6 mt-2">
           <SearchBar device="larger-screen" menu={false} />
-          <FaUserCircle size={30} />
+          <AuthSidebar />
           <Cart />
         </div>
       </div>
