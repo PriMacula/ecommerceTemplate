@@ -39,7 +39,7 @@ const DealsPromotions = () => {
       <div className="flex w-full  gap-x-8 gap-y-16 justify-center flex-wrap">
         {products.map((product) => (
           <Link
-            href="/product"
+            href="/1"
             className="h-[450px] w-[70%] md:w-[45%] xl:w-[22%] "
           >
             <div className="flex flex-col h-[400px] w-full relative">

@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const Hero = () => {
   return (
-    <div className="mt-4">
+    <div className="">
       <div className="flex flex-col h-[calc(100vh-140px)] md:flex-row  bg-black w-screen  relative ">
         <div className="flex h-full w-full md:w-1/2 relative ">
           <Image
@@ -10,7 +10,7 @@ const Hero = () => {
             alt=""
             fill
             className="object-cover"
-            sizes="(max-width: 768px) 100vw"
+            
           />
         </div>
         <div className="flex h-full w-full md:w-1/2 relative">
