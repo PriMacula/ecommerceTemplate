@@ -1,0 +1,75 @@
+/* src/app/admin/pages/orders/orders.module.css */
+.main {
+    position: relative;
+    background: #cecece; /* Gradient background */
+    color: #ffffff; /* White text */
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Box shadow */
+    animation: fadeIn 0.5s ease; /* Fade-in animation */
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .heading {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .orderList {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0; /* Space between grid items */
+    padding: 20px;
+    margin: 25px;
+  }
+  
+
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .orderTitle {
+    font-size: 24px;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+  
+  .orderDetails {
+    font-size: 18px;
+    color: #ffffff;
+    margin: 5px 0;
+  }
+  
+  .actionButton {
+    background-color: #000000; /* Black background */
+    color: #ffffff; /* White text */
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .actionButton:hover {
+    background-color: #ffffff; /* White background on hover */
+    color: #000000; /* Black text on hover */
+  }
+  

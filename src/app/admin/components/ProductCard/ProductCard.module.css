@@ -1,0 +1,59 @@
+/* /app/components/ProductCard/ProductCard.module.css */
+.productCard {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .productCard:hover {
+    transform: translateY(-5px);
+  }
+  
+  .productCard .imageWrapper {
+    position: relative;
+    width: 100%;
+    height: 200px;
+  }
+  
+  .productCard .info {
+    padding: 15px;
+  }
+  
+  .productCard .title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .productCard .description {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .productCard .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ff0058; /* Vivid color */
+    margin-bottom: 10px;
+  }
+  
+  .productCard .button {
+    background-color: #ff0058; /* Vivid color */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+  }
+  
+  .productCard .button:hover {
+    background-color: #d6004f; /* Darker shade of the vivid color */
+  }
+  

@@ -1,0 +1,36 @@
+/* /app/styles/DashboardSummary.module.css */
+.summaryContainer {
+    background-color: #fff;
+    color: #333;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .summaryTitle {
+    font-size: xx-large;
+    font-weight: 900;
+    margin-bottom: 20px;
+  }
+  
+  .summaryContent {
+    display: flex;
+    justify-content: space-around;
+    height: 200px;
+  }
+  
+  .summaryItem {
+    text-align: center;
+  }
+  
+  .summaryItem h4 {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .summaryItem p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff0058; /* Vivid color */
+  }
+  

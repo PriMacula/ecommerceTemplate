@@ -1,0 +1,53 @@
+/* src/app/admin/layout.module.css */
+.adminContainer {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: row;
+    height: 100vh; /* Full viewport height */
+    justify-content: flex-end;
+    overflow: hidden;
+    position: relative;
+
+  }
+  
+  .Sidebar {
+    flex: 0 0 250px; /* Fixed width for the sidebar */
+    height: 100%;
+    background-color: #000000; /* Black background for the sidebar */
+    color: #ffffff; /* White text */
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+  }
+  
+  .sidebar:hover {
+    transform: translateX(-10px); /* Slight shift on hover */
+  }
+  
+  .content {
+    flex: 1; /* Remaining space for the main content */
+    padding: 20px;
+    background-color: #ffffff; /* White background for the content */
+    color: #000000; /* Black text */
+    overflow-y: auto; /* Scrollable content */
+    transition: all 0.3s ease; /* Smooth transition for any changes */
+
+  }
+  
+  .content h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .content::-webkit-scrollbar {
+    width: 10px; /* Custom scrollbar width */
+  }
+  
+  .content::-webkit-scrollbar-thumb {
+    background: #000000; /* Black scrollbar thumb */
+    border-radius: 10px;
+  }
+  
+  .content::-webkit-scrollbar-track {
+    background: #ffffff; /* White scrollbar track */
+  }
+  

@@ -1,0 +1,25 @@
+/* src/app/admin/components/RecentOrders/RecentOrders.module.css */
+.orders {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    height: 250px;
+    width: 100%;
+  }
+  .orders h2{
+    font-size: xx-large;
+    font-weight: 900;
+  }
+  .orders table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .orders table th, .orders table td {
+    border: 1px solid #ffffff;
+    padding: 10px;
+    text-align: left;
+  }
+  

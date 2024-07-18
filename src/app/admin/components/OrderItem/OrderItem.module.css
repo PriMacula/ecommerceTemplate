@@ -1,0 +1,36 @@
+.orderItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin: 10px 0;
+    background: #fff;
+    color: #000;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* Ensure relative positioning if needed */
+  }
+  
+  .orderTitle {
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .orderDetails {
+    font-size: 14px;
+  }
+  
+  .actionButtons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .actionButton {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  

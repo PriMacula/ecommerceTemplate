@@ -1,0 +1,9 @@
+/* src/app/admin/components/SalesChart/SalesChart.module.css */
+.chart {
+    background-color: #fff;
+    color: #000;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  

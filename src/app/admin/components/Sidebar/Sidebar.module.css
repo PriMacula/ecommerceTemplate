@@ -1,0 +1,52 @@
+/* /app/admin/components/Sidebar/Sidebar.module.css */
+.sidebar {
+    flex: 0 0 250px; /* Fixed width for the sidebar */
+    height: 100%;
+    background-color: #000000; /* Black background for the sidebar */
+    color: #ffffff; /* White text */
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+  }
+  
+  .sidebar:hover {
+    transform: translateX(-10px); /* Slight shift on hover */
+  }
+
+.title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.menu {
+    list-style-type: none;
+    padding: 0;
+}
+
+.item {
+    margin-bottom: 15px;
+}
+
+.link {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none; /* Ensure links have no underline */
+}
+
+.link:hover {
+    background-color: #333;
+}
+
+.icon {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.link-text {
+    font-size: 1rem;
+}
