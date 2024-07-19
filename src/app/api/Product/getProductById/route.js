@@ -1,6 +1,6 @@
 // src/app/api/getProductById/route.js
-import connectToDatabase from '../../mongodb';
-import Product from '../../models/Product';
+import connectToDatabase from '../../../mongodb';
+import Product from '../../../models/Product';
 import { NextResponse } from 'next/server';
 
 export async function GET(req) {

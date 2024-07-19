@@ -17,7 +17,7 @@ const OrderItem = ({ order }) => {
   return (
     <>
       <div className={styles.orderItem}>
-        <h2 className={styles.orderTitle}>Order #{order.id}</h2>
+        <h2 className={styles.orderTitle}>Order #{order.orderId}</h2>
         <p className={styles.orderDetails}>Customer: {order.customerName}</p>
         <p className={styles.orderDetails}>Status: {order.status}</p>
         <div className={styles.actionButtons}>

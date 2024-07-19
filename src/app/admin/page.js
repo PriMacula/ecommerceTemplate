@@ -1,15 +1,11 @@
 // src/app/admin/page.js
-import React from 'react';
-import AdminLayout from './layout';
+import { redirect } from 'next/navigation';
 
 const AdminPage = () => {
-  return (
-    <AdminLayout>
-      <div>
-        {/* Your dashboard content here */}
-      </div>
-    </AdminLayout>
-  );
+  // Redirect to the dashboard page
+  redirect('/admin/pages/dashboard');
+
+  return null;
 };
 
 export default AdminPage;

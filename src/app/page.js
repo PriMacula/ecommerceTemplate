@@ -1,3 +1,4 @@
+// src/app/page.js
 import DealsPromotions from "@/components/DealsPromotions/DealsPromotions";
 import Hero from "@/components/Hero/Hero";
 import Categories from "@/components/Categories/Categories";
@@ -8,11 +9,10 @@ export default function Home() {
   return (
     <div className="overflow-hidden">
       <Hero />
-      <Categories/>
+      <Categories />
       <DealsPromotions />
-      <NewsLetter/>
-      <SocialMedia/>
-
+      <NewsLetter />
+      <SocialMedia />
     </div>
   );
 }

@@ -13,7 +13,7 @@ const CategoryPage = () => {
     // Example fetchProducts function to fetch products based on category
     const fetchProducts = async (category) => {
       try {
-        const response = await fetch(`/api/getProductsByCategory?category=${category}`);
+        const response = await fetch(`/api/Product/getProductsByCategory?category=${category}`);
         if (!response.ok) {
           throw new Error('Failed to fetch products');
         }
