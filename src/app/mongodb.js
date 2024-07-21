@@ -5,8 +5,6 @@ const connectToDatabase = async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URL, {
             dbName: 'EcommerceSite',
-            useNewUrlParser: true,
-            useUnifiedTopology: true
         });
         console.log('MongoDB connected');
     } catch (error) {

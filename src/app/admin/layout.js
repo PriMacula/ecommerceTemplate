@@ -3,7 +3,7 @@ import React from 'react';
 import Sidebar from './components/Sidebar/Sidebar';
 import styles from './layout.module.css';
 
-const Layout = ({ children }) => {
+const AdminLayout = ({ children }) => {
   return (
     <div className={styles.adminContainer}>
       <Sidebar />
@@ -14,4 +14,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+export default AdminLayout;

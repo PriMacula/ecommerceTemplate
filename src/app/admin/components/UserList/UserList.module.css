@@ -1,11 +1,10 @@
-/* src/app/admin/components/ProductList/ProductList.module.css */
-.productList {
+.userList {
     display: flex;
     flex-direction: column;
     width: 100%;
   }
   
-  .productItem {
+  .userItem {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -18,28 +17,33 @@
     animation: slideIn 0.3s ease-in-out;
   }
   
-  .productInfo {
+  .userInfo {
     display: flex;
     flex-direction: column;
   }
   
-  .productTitle {
+  .userName {
     font-weight: bold;
     font-size: 16px;
     margin-bottom: 5px;
   }
   
-  .productDescription {
+  .userStatus {
+    font-size: 14px;
+    margin-left: 10px;
+  }
+  
+  .userEmail {
     font-size: 14px;
     margin-bottom: 5px;
   }
   
-  .productPrice {
+  .userBanned {
     font-size: 14px;
     font-weight: bold;
   }
   
-  .productActions {
+  .userActions {
     display: flex;
     gap: 10px;
   }

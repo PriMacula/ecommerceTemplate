@@ -99,7 +99,7 @@ const SingleProductPage = () => {
 
 // Fetch single product details from the API
 const fetchProduct = async (id) => {
-  const response = await fetch(`/api/getProductById?id=${id}`);
+  const response = await fetch(`/api/Product/getProductById?id=${id}`);
   const data = await response.json();
   return data;
 };

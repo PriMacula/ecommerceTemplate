@@ -1,40 +1,34 @@
 "use client";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import OrderItem from '../../components/OrderItem/OrderItem';
 import styles from './orders.module.css';
 
 const OrdersPage = () => {
-  const orders = [
-    {
-      id: '12345',
-      customerName: 'John Doe',
-      shippingAddress: '123 Main St, Anytown, USA',
-      status: 'Pending',
-      products: [
-        { name: 'Product 1', quantity: 2, price: 30 },
-        { name: 'Product 2', quantity: 1, price: 20 }
-      ],
-      total: 80
-    },
-    {
-      id: '12346',
-      customerName: 'Jane Smith',
-      shippingAddress: '456 Elm St, Othertown, USA',
-      status: 'Shipped',
-      products: [
-        { name: 'Product 3', quantity: 1, price: 50 },
-        { name: 'Product 4', quantity: 3, price: 15 }
-      ],
-      total: 95
-    }
-  ];
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await fetch('/api/Order/getOrders'); // Make sure this path matches your route
+        if (!response.ok) {
+          throw new Error('Failed to fetch orders');
+        }
+        const data = await response.json();
+        setOrders(data);
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+      }
+    };
+
+    fetchOrders();
+  }, []);
 
   return (
     <div className={styles.main}>
       <h1 className={styles.heading}>Manage Orders</h1>
       <div className={styles.orderList}>
         {orders.map(order => (
-          <OrderItem key={order.id} order={order} />
+          <OrderItem key={order._id} order={order} /> // Use _id if your MongoDB schema uses it
         ))}
       </div>
     </div>

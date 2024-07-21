@@ -1,7 +1,9 @@
+// src/app/layout.js
 import { Inter } from "next/font/google";
-import "./globals.css";
 import NavBar from "@/components/NavBar/NavBar";
 import Footer from "@/components/Footer/Footer";
+import "./globals.css";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {

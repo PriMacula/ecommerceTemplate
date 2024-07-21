@@ -1,0 +1,71 @@
+.userFormContainer {
+    position: relative;
+    background-color: #fff; /* White background for the form */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners for the form */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for the form */
+    min-width: 500px; /* Maximum width for the form */
+    margin: auto; /* Center the form */
+  }
+  
+  .closeButtonWrapper {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .closeButton {
+    padding: 8px; /* Padding to fit the icon */
+    cursor: pointer;
+    font-size: 20px;
+    color: #333; /* Icon color */
+    transition: color 0.3s;
+  }
+  
+  .closeButton:hover {
+    color: red;
+  }
+  
+  .h2 {
+    margin-bottom: 20px; /* Space below the heading */
+    font-size: 24px; /* Font size for the heading */
+    color: #333; /* Heading color */
+  }
+  
+  .formGroup {
+    margin-bottom: 15px; /* Space between form groups */
+  }
+  
+  .formGroup label {
+    display: block; /* Make label a block element */
+    font-weight: bold; /* Bold text for labels */
+    color: #000; /* Black color for labels */
+    margin-bottom: 5px; /* Space below the label */
+  }
+  
+  .formGroup p {
+    margin: 0; /* Remove margin around paragraph */
+    color: #555; /* Dark gray color for text */
+  }
+  
+  .profilePic {
+    max-width: 100px; /* Limit the width of the profile picture */
+    border-radius: 50%; /* Circular profile picture */
+    border: 1px solid #ddd; /* Border around the image */
+  }
+  
+  .button {
+    background-color: #007bff; /* Primary button color */
+    border: none;
+    color: #fff; /* Text color for button */
+    padding: 10px 15px; /* Padding for button */
+    border-radius: 4px; /* Rounded corners for button */
+    cursor: pointer;
+    font-size: 16px; /* Font size for button text */
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+  
+  .button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+  }
+  
