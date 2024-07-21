@@ -1,0 +1,165 @@
+.formOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  
+  .closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+
+.manageUsers {
+    background-color: #fff;
+    color: #000;
+    font-family: Arial, sans-serif;
+  }
+  
+  .topBar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .searchBar {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 100%;
+  }
+  
+  
+  .formOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .formContainer {
+    background-color: #fff;
+    color: #000;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 1000px;
+    padding: 20px;
+    position: relative;
+  }
+  
+  .closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #000;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .closeButton:hover {
+    color: #ff0000;
+  }
+  
+  .userList {
+    margin-top: 20px;
+  }
+  
+  .userItem {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    align-items: center;
+  }
+  
+  .userItem button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #000;
+    transition: color 0.3s;
+  }
+  
+  .userItem button:hover {
+    color: #ff0000;
+  }
+  
+  .userItem-info {
+    flex: 1;
+  }
+  
+  .userItem-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .userForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .userForm .formGroup {
+    margin-bottom: 20px;
+  }
+  
+  .userForm .formGroup label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+  
+  .userForm .formGroup input,
+  .userForm .formGroup textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .userForm .formGroup textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .saveButton {
+    grid-column: span 2;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .saveButton:hover {
+    background-color: #333;
+  }
+  
