@@ -3,6 +3,7 @@ import Hero from "@/components/Hero/Hero";
 import Categories from "@/components/Categories/Categories";
 import SocialMedia from "@/components/SocialMedia/SocialMedia";
 import NewsLetter from "@/components/NewsLetter/NewsLetter";
+import { Toaster } from "sonner";
 
 export default function Home() {
   return (
@@ -12,7 +13,7 @@ export default function Home() {
       <DealsPromotions />
       <NewsLetter/>
       <SocialMedia/>
-
+      <Toaster richColors  />
     </div>
   );
 }

@@ -1,7 +1,4 @@
 import Image from "next/image";
-import { FaCartShopping } from "react-icons/fa6";
-import { FaUserCircle } from "react-icons/fa";
-
 import MobileMenu from "./MobileMenu";
 import Link from "next/link";
 import NavLinks from "./NavLinks";

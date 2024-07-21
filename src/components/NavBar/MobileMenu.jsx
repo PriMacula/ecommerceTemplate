@@ -8,34 +8,10 @@ import { FaCartShopping } from "react-icons/fa6";
 import SearchBar from "./SearchBar";
 
 const MobileMenu = () => {
+  
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
-  /*  const [clickedAway, setClickedAway] = useState(false);
-  const setClickedAwayToFalse = () => {
-    setClickedAway(false);
-  }; */
-
-  /* useEffect(() => {
-    const handleOutsideClick = (e: MouseEvent) => {
-      // Check if menuRef is defined and if the clicked target is outside of it
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setIsOpen(false); // Close the menu by setting isOpen to false
-      }
-    };
-
-    // Add event listener when the menu is open
-    if (isOpen) {
-      document.addEventListener("mousedown", handleOutsideClick); // Listen for clicks outside the menu
-    } else {
-      // Remove event listener when the menu is closed
-      document.removeEventListener("mousedown", handleOutsideClick);
-    }
-
-    // Cleanup function to remove event listener on component unmount or when isOpen changes
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
-  }, [isOpen]); */
+  
 
   return (
     <div className="z-10">
