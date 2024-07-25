@@ -4,8 +4,7 @@ import React, { useState, useEffect } from 'react';
 import UserList from '../UserList/UserList';
 import UserForm from '../UserForm/UserForm'; // Assume you have a UserForm component
 import styles from './ManageUsers.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
+
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -28,7 +27,6 @@ const ManageUsers = () => {
   }, []);
 
   const handleView = (user) => {
-    setEditingUser(user);
     setIsFormVisible(true);
   };
 

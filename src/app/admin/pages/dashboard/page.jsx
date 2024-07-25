@@ -11,21 +11,7 @@ import AdminLayout from '../../layout'; // Import AdminLayout
 const DashboardPage = () => {
   return (
     <>
-      <h1 className={styles.heading}>Dashboard</h1>
-      <div className={styles.main}>
-        <div className={styles.dashboardSummary}>
-          <DashboardSummary />
-        </div>
-        <div className={styles.salesChart}>
-          <SalesChart />
-        </div>
-        <div className={styles.recentOrders}>
-          <RecentOrders />
-        </div>
-        <div className={styles.customerFeedback}>
-          <CustomerFeedback />
-        </div>
-      </div>
+      <DashboardSummary />
     </>
   );
 };
