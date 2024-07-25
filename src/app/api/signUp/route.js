@@ -1,27 +1,30 @@
-import { lucia } from "@/lib/auth";
-import User from "../../models/User";
-import connectToDatabase from "../../mongodb";
-import crypto from "crypto";
-import { generateForgetPasswordCode, hashPassword } from "../../../utils/utils";
+import { NextResponse } from 'next/server';
+import { lucia } from '@/lib/auth';
+import User from '../../models/User';
+import connectToDatabase from '../../mongodb';
+import crypto from 'crypto';
+import { hashPassword } from '../../../utils/utils';
 
-export async function POST(req) {
-  const { email, password, name } = await req.json();
+export async function POST(request) {
+  const { email, password, name, cart } = await request.json();
 
   try {
     await connectToDatabase();
 
     const existingUser = await User.findOne({ email, accountType: "email" });
     if (existingUser) {
-      return new Response(
-        JSON.stringify({ error: "Email is already registered" }),
-        {
-          status: 400,
-          headers: { "Content-Type": "application/json" },
-        }
+      return NextResponse.json(
+        { error: "Email is already registered" },
+        { status: 400 }
       );
     }
 
-    const salt = crypto.randomBytes(128).toString("hex");
+    const validatedCart = Array.isArray(cart) 
+      ? cart.filter(item => item.id && item.quantity > 0) 
+      : [];
+      console.log('Validated cart:', validatedCart);
+
+    const salt = crypto.randomBytes(128).toString('hex');
     const hashedPassword = await hashPassword(password, salt);
 
     const user = await User.create({
@@ -30,26 +33,19 @@ export async function POST(req) {
       password: hashedPassword,
       salt: salt,
       accountType: "email",
+      cart: validatedCart,
     });
+
 
     const session = await lucia.createSession(user._id, {});
     const sessionCookie = lucia.createSessionCookie(session.id);
 
-    return new Response(JSON.stringify({ success: true }), {
-      status: 200,
-      headers: {
-        "Set-Cookie": `${sessionCookie.name}=${sessionCookie.value}; Path=/; HttpOnly`,
-        "Content-Type": "application/json",
-      },
-    });
+    const headers = new Headers();
+    headers.append('Set-Cookie', `${sessionCookie.name}=${sessionCookie.value}; Path=/; HttpOnly`);
+    
+    return NextResponse.json({ success: true }, { headers });
   } catch (e) {
-    console.log("error", e);
-    return new Response(
-      JSON.stringify({ error: "An unknown error occurred" }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      }
-    );
+    console.error("Error during signup:", e);
+    return NextResponse.json({ error: "An unknown error occurred" }, { status: 500 });
   }
 }

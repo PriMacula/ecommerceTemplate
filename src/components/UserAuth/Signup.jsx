@@ -1,72 +1,74 @@
-"use client";
-import React, { useState } from "react";
-import FloatingLabelInput from "./FloatingLabelInput";
-import { toast } from "sonner";
+import React, { useState } from 'react';
+import FloatingLabelInput from './FloatingLabelInput';
+import { toast } from 'sonner';
 
 const Signup = ({ setAuthState }) => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
-  const validateEmail = (email) => {
-    return email.includes("@") && email.includes(".");
-  };
+  const validateEmail = (email) => email.includes('@') && email.includes('.');
 
-  const validatePassword = (password) => {
-    return password.length >= 8 && /[A-Z]/.test(password);
-  };
+  const validatePassword = (password) => password.length >= 8 && /[A-Z]/.test(password);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     let hasError = false;
 
     if (!validateEmail(email)) {
-      toast.error("Invalid email address");
-      setEmailError(true);
+      toast.error('Invalid email address');
+      setEmailError('Invalid email address');
       hasError = true;
     } else {
-      setEmailError(false);
+      setEmailError('');
     }
 
     if (!validatePassword(password)) {
-      toast.error("Password must be at least 8 characters long and contain at least one uppercase letter");
-      setPasswordError(true);
+      toast.error('Password must be at least 8 characters long and contain at least one uppercase letter');
+      setPasswordError('Password must be at least 8 characters long and contain at least one uppercase letter');
       hasError = true;
     } else if (password !== confirmPassword) {
-      toast.error("Passwords do not match");
-      setPasswordError(true);
+      toast.error('Passwords do not match');
+      setPasswordError('Passwords do not match');
       hasError = true;
     } else {
-      setPasswordError(false);
+      setPasswordError('');
     }
 
     if (hasError) return;
 
-    const res = await fetch("/api/signUp", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password, name }),
-    });
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-    if (res.ok) {
-      toast.success("Account created successfully");
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-    } else {
-      const { error } = await res.json();
-      toast.error(error || "An unknown error occurred");
+    try {
+      const res = await fetch('/api/signUp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password, name, cart }),
+      });
+
+      if (res.ok) {
+        toast.success('Account created successfully');
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      } else {
+        const { error } = await res.json();
+        toast.error(error || 'An unknown error occurred');
+      }
+    } catch (error) {
+      console.error("Failed to submit signup form:", error);
+      toast.error('An error occurred while processing your request');
     }
   };
 
   const handleInputChange = (setter, setError) => (e) => {
     setter(e.target.value);
-    setError(false);
+    setError(''); // Clear the error when input changes
   };
 
   return (
@@ -81,16 +83,16 @@ const Signup = ({ setAuthState }) => {
           type="text"
           id="name"
           value={name}
-          onChange={(e)=>{setName(e.target.value)}}
+          onChange={handleInputChange(setName, () => {})}
         />
-        
         <FloatingLabelInput
           labelText="Email Address"
           type="email"
           id="email"
           value={email}
           onChange={handleInputChange(setEmail, setEmailError)}
-          hasError={emailError}
+          hasError={!!emailError}
+          errorMessage={emailError}
         />
         <FloatingLabelInput
           labelText="Password"
@@ -98,7 +100,8 @@ const Signup = ({ setAuthState }) => {
           id="password"
           value={password}
           onChange={handleInputChange(setPassword, setPasswordError)}
-          hasError={passwordError}
+          hasError={!!passwordError}
+          errorMessage={passwordError}
         />
         <FloatingLabelInput
           labelText="Confirm Password"
@@ -106,9 +109,9 @@ const Signup = ({ setAuthState }) => {
           id="confirmPassword"
           value={confirmPassword}
           onChange={handleInputChange(setConfirmPassword, setPasswordError)}
-          hasError={passwordError}
+          hasError={!!passwordError}
+          errorMessage={passwordError}
         />
-
         <button
           type="submit"
           className="bg-black text-white font-bold uppercase px-8 py-4 w-full rounded-md hover:bg-[#111111e7]"
@@ -119,10 +122,9 @@ const Signup = ({ setAuthState }) => {
           Already have an account?
           <span
             className="uppercase font-bold cursor-pointer hover:border-b-2 border-black pb-1"
-            onClick={() => setAuthState("login")}
+            onClick={() => setAuthState('login')}
           >
-            {" "}
-            Login
+            {' '}Login
           </span>
         </p>
       </form>

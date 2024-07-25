@@ -7,13 +7,75 @@ import { FaCartShopping } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io";
 import { MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { getCart, removeFromCart } from "@/utils/cart";
+
+export const isAuthenticated = async () => {
+  try {
+    const response = await fetch('/api/check-auth', { method: 'GET' });
+    const data = await response.json();
+    if (response.ok) {
+      return data.isLoggedIn;
+    } else {
+      console.error("Failed to check authentication:", data.error);
+      return false;
+    }
+  } catch (error) {
+    console.error("Error checking authentication:", error);
+    return false;
+  }
+};
+
+
+const fetchProduct = async (id) => {
+  const response = await fetch(`/api/Product/getProductById?id=${id}`);
+  const data = await response.json();
+  return data.product;
+};
+
+const fetchCart = async () => {
+  const authenticated = await isAuthenticated();
+  if (authenticated) {
+    try {
+      const response = await fetch("/api/cart", { method: "GET" });
+      const data = await response.json();
+      console.log("API response:", data);
+      if (response.ok) {
+        return data.cart || [];
+      } else {
+        console.error("Failed to fetch cart:", data.error);
+        return [];
+      }
+    } catch (error) {
+      console.error("Error fetching cart:", error);
+      return [];
+    }
+  } else {
+    return getCart();
+  }
+};
+
+
 
 const Cart = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [isEmpty, setIsEmpty] = useState(true);
+
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add("no-scroll");
+      const loadCartItems = async () => {
+        try {
+          const cart = await fetchCart();
+          console.log("Cart items:", cart);
+          setCartItems(cart);
+          setIsEmpty(cart.length === 0);
+        } catch (error) {
+          console.error("Failed to fetch cart items:", error);
+        }
+      };
+      loadCartItems();
     } else {
       document.body.classList.remove("no-scroll");
     }
@@ -21,6 +83,37 @@ const Cart = () => {
       document.body.classList.remove("no-scroll");
     };
   }, [isOpen]);
+  
+
+  useEffect(() => {
+    const fetchCartProducts = async () => {
+      if (cartItems.length > 0) {
+        const productsData = await Promise.all(
+          cartItems.map(async (item) => {
+            const product = await fetchProduct(item.id);
+            return { ...product, quantity: item.quantity, size: item.size };
+          })
+        );
+        setProducts(productsData);
+      } else {
+        setProducts([]);
+      }
+    };
+
+    fetchCartProducts();
+  }, [cartItems]);
+
+  const handleRemove = async (id) => {
+    try {
+      await removeFromCart(id);
+      const cart = await fetchCart();
+      setCartItems(cart);
+      setProducts((prev) => prev.filter((item) => item.id !== id));
+      setIsEmpty(cart.length === 0);
+    } catch (error) {
+      console.error("Failed to remove item from cart:", error);
+    }
+  };
 
   return (
     <div className="relative">
@@ -57,7 +150,7 @@ const Cart = () => {
             </div>
             {isEmpty ? (
               <div className="h-[calc(100vh-80px)] w-full flex flex-col py-8 px-4">
-                <div className="relative h-1/2  w-full">
+                <div className="relative h-1/2 w-full">
                   <Image
                     src="/emptyCart.png"
                     alt=""
@@ -73,7 +166,7 @@ const Cart = () => {
                       <p>Browse our top picks and start shopping now!</p>
                     </div>
                   </div>
-                  <button className="  bg-[#fc9b7b] text-3xl text-white font-bold rounded-lg  p-4">
+                  <button className="bg-[#fc9b7b] text-3xl text-white font-bold rounded-lg p-4">
                     Shop Now
                   </button>
                 </div>
@@ -81,65 +174,53 @@ const Cart = () => {
             ) : (
               <div className="h-[calc(100vh-80px)] w-full flex flex-col py-8 px-4">
                 <div className="h-3/4 flex flex-col gap-4 overflow-auto">
-                  <div className="h-1/4 flex">
-                    <div className="h-full w-1/3  relative">
-                      <Image
-                        src="/man.jpg"
-                        alt=""
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="flex flex-col justify-between p-2 w-2/3  border-y-2 border-[#e0e1dd]">
-                      <div className="flex items-center justify-between">
-                        <h2 className="text-xl">Product Name</h2>
-                        <div className="flex gap-2">
-                          <MdOutlineEdit className="cursor-pointer" size={20} />
-                          <RiDeleteBinLine
-                            className="cursor-pointer"
-                            size={20}
-                          />
-                        </div>
+                  {products.map((product) => (
+                    <div key={product._id} className="h-1/4 flex">
+                      <div className="h-full w-1/3 relative">
+                        <Image
+                          src={product.image}
+                          alt={product.title}
+                          fill
+                          className="object-cover"
+                        />
                       </div>
-                      <h2 className="text-[#FF0058] font-semibold text-sm">
-                        99 TND
-                      </h2>
-                      <h3 className="text-sm">Quantity: 1</h3>
-                      <h3 className="text-sm">Size: xl</h3>
-                    </div>
-                  </div>
-                  <div className="h-1/4 flex">
-                    <div className="h-full w-1/3  relative">
-                      <Image
-                        src="/man.jpg"
-                        alt=""
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div className="flex flex-col justify-between p-2 w-2/3  border-y-2 border-[#e0e1dd]">
-                      <div className="flex items-center justify-between">
-                        <h2 className="text-xl">Product Name</h2>
-                        <div className="flex gap-2">
-                          <MdOutlineEdit className="cursor-pointer" size={20} />
-                          <RiDeleteBinLine
-                            className="cursor-pointer"
-                            size={20}
-                          />
+                      <div className="flex flex-col justify-between p-2 w-2/3 border-y-2 border-[#e0e1dd]">
+                        <div className="flex items-center justify-between">
+                          <h2 className="text-xl">{product.title}</h2>
+                          <div className="flex gap-2">
+                            <MdOutlineEdit
+                              className="cursor-pointer"
+                              size={20}
+                            />
+                            <RiDeleteBinLine
+                              className="cursor-pointer"
+                              size={20}
+                              onClick={() => handleRemove(product._id)}
+                            />
+                          </div>
                         </div>
+                        <h2 className="text-[#FF0058] font-semibold text-sm">
+                          {product.price} TND
+                        </h2>
+                        <h3 className="text-sm">
+                          Quantity: {product.quantity}
+                        </h3>
+                        <h3 className="text-sm">Size: {product.size}</h3>
                       </div>
-                      <h2 className="text-[#FF0058] font-semibold text-sm">
-                        99 TND
-                      </h2>
-                      <h3 className="text-sm">Quantity: 1</h3>
-                      <h3 className="text-sm">Size: xl</h3>
                     </div>
-                  </div>
+                  ))}
                 </div>
-                <div className="flex flex-col gap-4  h-1/4 px-4">
+                <div className="flex flex-col gap-4 h-1/4 px-4">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg">1 Article</h3>
-                    <h2 className="text-lg font-bold">99 TND</h2>
+                    <h3 className="text-lg">{products.length} Articles</h3>
+                    <h2 className="text-lg font-bold">
+                      {products.reduce(
+                        (acc, product) =>
+                          acc + product.price * product.quantity,
+                        0
+                      )}{" "}
+                      TND
+                    </h2>
                   </div>
                   <div className="flex items-center justify-between pb-2 border-b-2">
                     <h3 className="text-lg">Delivery Fees</h3>
@@ -147,9 +228,16 @@ const Cart = () => {
                   </div>
                   <div className="flex items-center justify-between">
                     <h3 className="text-lg">Total</h3>
-                    <h2 className="text-lg font-bold">99 TND</h2>
+                    <h2 className="text-lg font-bold">
+                      {products.reduce(
+                        (acc, product) =>
+                          acc + product.price * product.quantity,
+                        0
+                      )}{" "}
+                      TND
+                    </h2>
                   </div>
-                  <div className="flex items-center justify-center ">
+                  <div className="flex items-center justify-center">
                     <Link href="/cart" className="w-full">
                       <button
                         className="bg-[#00b27d] text-white text-xl font-semibold w-full p-3 rounded-md"
