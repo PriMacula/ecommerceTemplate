@@ -48,10 +48,13 @@ export async function POST(req) {
     );
     console.log("Session cookie set");
 
-    return new Response(JSON.stringify({ message: "Login successful" }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({ message: "Login successful", cart: user.cart }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   } catch (e) {
     console.error("Error during login process:", e);
     return new Response(

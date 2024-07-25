@@ -5,18 +5,51 @@ import { useParams } from "next/navigation";
 import RelatedProducts from "@/components/RelatedProducts/RelatedProducts";
 import Add from "@/components/SingleProduct/Add";
 import CallToAction from "@/components/SingleProduct/CallToAction";
-import CustomizeProduct from "@/components/SingleProduct/CustomizeProduct";
 import ProducImgs from "@/components/SingleProduct/ProducImgs";
 import AddReview from "@/components/AddReview/AddReview";
 import ReviewList from "@/components/ReviewList/ReviewList";
+import { addToCart } from "@/utils/cart"; // Import the addToCart utility function
 import Image from "next/image";
 import styles from "./SingleProduct.module.css";
 
 const SingleProductPage = () => {
   const { id } = useParams();
-  
+  const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState(null);
   const [reviews, setReviews] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      const response = await fetch("/api/check-auth");
+      const data = await response.json();
+      setIsAuthenticated(data.isLoggedIn);
+    };
+
+    checkAuthStatus();
+  }, []);
+
+  const handleAddToCart = async () => {
+    if (isAuthenticated) {
+      console.log(quantity);
+      const response = await fetch("/api/addToCart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ productId: id, quantity }),
+      });
+
+      if (response.ok) {
+        console.log("Added to database cart");
+      } else {
+        console.error("Failed to add to database cart");
+      }
+    } else {
+      // User is not authenticated, add to local storage
+      addToCart({ id, quantity });
+    }
+  };
 
   useEffect(() => {
     if (id) {
@@ -53,7 +86,7 @@ const SingleProductPage = () => {
 
   return (
     <div className="flex flex-col gap-16 mt-16 px-4 md:px-8 lg:px-8 xl:px-18 2xl:px-28 relative">
-      <div className="flex flex-col lg:flex-row">
+      <div className="flex flex-col lg:flex-row gap-4">
         {/* IMGS */}
         <div className="w-full lg:w-1/2">
           <ProducImgs />
@@ -67,14 +100,18 @@ const SingleProductPage = () => {
                 {(product.price * 0.8).toFixed(2)} DT
               </h2>
               <h4 className="text-sm font-medium text-[#FF0058]">
-                -{((product.price - (product.price * 0.8)) / product.price) * 100}%
+                -{((product.price - product.price * 0.8) / product.price) * 100}%
               </h4>
               <h3 className="text-gray-800 line-through">{product.price} DT</h3>
             </div>
             <p>{product.description}</p>
           </div>
-          <CustomizeProduct />
-          <Add />
+
+          <Add
+            quantity={quantity}
+            setQuantity={setQuantity}
+            addToCart={handleAddToCart}
+          />
           <CallToAction />
           <div className="flex flex-col gap-4 font-medium tracking-wide">
             <div className="flex items-center gap-2 -mt-6">

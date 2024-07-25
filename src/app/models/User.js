@@ -1,5 +1,17 @@
 import mongoose from 'mongoose';
 
+const CartItemSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    required: true,
+    min: 1, 
+  },
+}, { _id: false }); 
+
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -19,7 +31,7 @@ const UserSchema = new mongoose.Schema({
   },
   salt: {
     type: String,
-    required: false, 
+    required: false,
   },
   profilePic: {
     type: String,
@@ -48,8 +60,12 @@ const UserSchema = new mongoose.Schema({
   },
   accountType: {
     type: String,
-    enum: ['email', 'google'], // Adjust according to your account types
+    enum: ['email', 'google'],
     default: 'email',
+  },
+  cart: {
+    type: [CartItemSchema], 
+    default: [],
   },
 });
 

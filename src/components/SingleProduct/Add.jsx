@@ -1,9 +1,6 @@
-"use client";
 
-import { useState } from "react";
 
-const Add = () => {
-  const [quantity, setQuantity] = useState(1);
+const Add = ({ quantity, setQuantity, addToCart }) => {
   const maxqtty = 5;
   const handleInc = () => {
     if (quantity < maxqtty) {
@@ -41,6 +38,7 @@ const Add = () => {
         <button
           className="font-medium rounded-3xl py-3 px-6 ring-1 ring-black hover:text-white
           hover:bg-black "
+          onClick={addToCart}
         >
           Add to Cart
         </button>
