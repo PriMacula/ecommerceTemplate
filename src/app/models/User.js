@@ -11,17 +11,15 @@ const UserSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true,
     unique: true,
     trim: true,
   },
   password: {
     type: String,
-    required: true,
   },
   salt: {
     type: String,
-    required: true, // Assuming salt is also required for password hashing
+    required: false, 
   },
   profilePic: {
     type: String,
@@ -50,7 +48,7 @@ const UserSchema = new mongoose.Schema({
   },
   accountType: {
     type: String,
-    enum: ['email', 'social'], // Adjust according to your account types
+    enum: ['email', 'google'], // Adjust according to your account types
     default: 'email',
   },
 });
