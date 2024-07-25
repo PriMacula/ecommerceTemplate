@@ -61,16 +61,8 @@ const OrderDetails = ({ order, onClose }) => {
           <p><strong>Order ID:</strong> {order.orderId}</p>
           <p><strong>Customer Name:</strong> {order.customerName}</p>
           <p><strong>Shipping Address:</strong> {order.shippingAddress}</p>
-          <p><strong>Status:</strong>
-            <select value={status} onChange={handleStatusChange} className={styles.statusDropdown}>
-              <option value="Pending">Pending</option>
-              <option value="Shipped">Shipped</option>
-              <option value="Delivered">Delivered</option>
-              <option value="Cancelled">Cancelled</option>
-            </select>
-            <button className={styles.saveButton} onClick={handleSaveClick}>Save</button>
-          </p>
-          <h3>Products:</h3>
+          <p><strong>Status:</strong> {order.status}</p>
+          <h3><strong>Products:</strong></h3>
           {error ? (
             <p className={styles.error}>Error: {error}</p>
           ) : (
@@ -78,7 +70,7 @@ const OrderDetails = ({ order, onClose }) => {
               {products.length > 0 ? (
                 products.map((product, index) => (
                   <li key={index}>
-                    {product.title} - {product.quantity} x ${product.price?.toFixed(2) || '0.00'}
+                      &#9679; {product.title} - {product.quantity} x ${product.price?.toFixed(2) || '0.00'}
                   </li>
                 ))
               ) : (
@@ -88,7 +80,6 @@ const OrderDetails = ({ order, onClose }) => {
           )}
           <p><strong>Total:</strong> ${totalPrice}</p>
         </div>
-        <button className={styles.actionButton} onClick={handleSaveClick}>Contact Customer</button>
       </div>
     </div>
   );
