@@ -3,7 +3,7 @@ import styles from './UserForm.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
-const UserForm = ({ initialUser = {}, onClose }) => { // Added onClose prop
+const UserForm = ({ initialUser, onClose }) => { // Added onClose prop
   return (
     <div className={styles.userFormContainer}>
       <div className={styles.closeButtonWrapper}>
