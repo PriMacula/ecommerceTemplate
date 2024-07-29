@@ -6,23 +6,29 @@ const OrderCard = ({ order }) => {
   const [viewMore, setViewMore] = useState(false);
 
   return (
-    <div className="border text-card-foreground bg-background p-6 rounded-lg shadow-md" data-v0-t="card">
+    <div className="border text-card-foreground bg-background p-6 rounded-lg shadow-md">
       <div className="flex items-center justify-between mb-4">
-        <div className="text-muted-foreground">Order #{order.id} - {order.date}</div>
+        <div className="text-muted-foreground">
+          Order #{order.orderId} - {new Date(order.createdAt).toLocaleDateString()}
+        </div>
         <div
-          className="inline-flex w-fit items-center whitespace-nowrap border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80 px-3 py-1 rounded-full text-xs"
-          data-v0-t="badge"
+          className={`inline-flex w-fit items-center whitespace-nowrap border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent ${
+            order.status === 'Delivered' ? 'bg-green-500 text-green-50' : 
+            order.status === 'Pending' ? 'bg-yellow-500 text-yellow-50' : 
+            order.status === 'Shipped' ? 'bg-blue-500 text-blue-50' : 
+            'bg-red-500 text-red-50'
+          } hover:bg-opacity-80 px-3 py-1 rounded-full text-xs`}
         >
           {order.status}
         </div>
       </div>
       <div className="grid gap-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {order.items.slice(0, viewMore ? order.items.length : 2).map((item, index) => (
-            <OrderItem key={index} item={item} />
+          {order.products.slice(0, viewMore ? order.products.length : 2).map((product, index) => (
+            <OrderItem key={index} item={product} />
           ))}
         </div>
-        <div data-orientation="horizontal" role="none" className="shrink-0 bg-border h-[1px] w-full"></div>
+        <div className="shrink-0 bg-border h-[1px] w-full"></div>
         <div className="flex justify-end">
           <button
             onClick={() => setViewMore(!viewMore)}
