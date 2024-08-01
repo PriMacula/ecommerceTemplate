@@ -1,4 +1,4 @@
-import "server-only";
+import "use server";
 import { cookies } from "next/headers";
 import { lucia } from "../lib/auth";
 import { validateRequest } from "../lib/auth";

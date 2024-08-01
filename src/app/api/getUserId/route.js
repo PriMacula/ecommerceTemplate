@@ -3,13 +3,12 @@ import { validateRequest } from "@/lib/auth";
 
 export async function GET() {
   try {
-    const { session } = await validateRequest();
     const { user } = await validateRequest();
-    console.log(user);
-    if (session) {
-      return NextResponse.json({ isLoggedIn: true });
+    if (user) {
+      console.log(user.id);
+      return NextResponse.json(user.id);
     }
-    return NextResponse.json({ isLoggedIn: false });
+    return null
   } catch (error) {
     console.error("Error checking authentication:", error);
     return NextResponse.json(
