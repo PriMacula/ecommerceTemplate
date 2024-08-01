@@ -78,7 +78,7 @@ const CartPage = () => {
 
   const handleOrderPlaced = async () => {
     try {
-      await clearCart(); // Clear the cart based on authentication status
+      await clearCart();
       setCartItems([]);
     } catch (error) {
       console.error("Failed to clear cart:", error);

@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { useRouter } from "next/navigation"; 
 
 const governorates = [
   "Tunis",
@@ -34,6 +35,7 @@ const CartForm = ({ cartItems, productDetails, onOrderPlaced }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [addressLine, setAddressLine] = useState("");
   const [city, setCity] = useState(governorates[0]);
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -73,10 +75,10 @@ const CartForm = ({ cartItems, productDetails, onOrderPlaced }) => {
 
       console.log("Order placed successfully:", data.order);
 
-      // Call the callback to clear the cart
       if (onOrderPlaced) {
-        onOrderPlaced();
+        await onOrderPlaced();
       }
+      router.push(`/success?orderId=${orderId}`);
     } catch (error) {
       console.error("Error placing order:", error);
     }
