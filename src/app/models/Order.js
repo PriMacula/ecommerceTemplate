@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
@@ -17,16 +17,22 @@ const orderSchema = new Schema({
     type: String,
     required: true,
   },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    
+    required: false,
+  },
   status: {
     type: String,
-    enum: ['Pending', 'Shipped', 'Delivered', 'Cancelled'], // Define possible status values
-    default: 'Pending',
+    enum: ["Pending", "Shipped", "Delivered", "Cancelled"], // Define possible status values
+    default: "Pending",
   },
   products: [
     {
       productId: {
         type: Schema.Types.ObjectId,
-        ref: 'Product', // Reference to a Product model
+        ref: "Product", // Reference to a Product model
         required: true,
       },
       quantity: {
@@ -55,12 +61,12 @@ const orderSchema = new Schema({
 });
 
 // Update the `updatedAt` field before saving
-orderSchema.pre('save', function (next) {
+orderSchema.pre("save", function (next) {
   this.updatedAt = Date.now();
   next();
 });
 
 // Create and export the Order model
-const Order =mongoose.models.Order || mongoose.model('Order', orderSchema);
+const Order = mongoose.models.Order || mongoose.model("Order", orderSchema);
 
 export default Order;

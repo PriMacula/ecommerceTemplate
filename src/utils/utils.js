@@ -1,8 +1,8 @@
 "use server";
 import crypto from "crypto";
-import User from "../app/models/User";
+import User from '../app/models/User';
 import connectToDatabase from "../app/mongodb";
-import { validateRequest } from "@/lib/auth";
+import { validateRequest } from "../lib/auth";
 const ITERATIONS = 10000;
 
 export async function hashPassword(plainTextPassword, salt) {
@@ -30,6 +30,10 @@ export async function verifyPassword(email, password) {
   if (!salt || !savedPassword) return false;
   const hashedPassword = await hashPassword(password, salt);
   return user.password === hashedPassword;
+}
+export default async function verifyAdminPass(password) {
+  const hashedPassword = await hashPassword(password, process.env.ADMIN_SALT);
+  return hashedPassword === process.env.ADMIN_PASSWORD;
 }
 export async function isLoggedIn() {
   const { session } = await validateRequest();
